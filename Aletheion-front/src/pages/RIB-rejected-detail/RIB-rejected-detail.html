@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Rejected RIB</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="RIB.id">
+        <ion-card-content>
+            <h2 class="card-title">{{RIB.companyname}}</h2>
+        </ion-card-content>
+        <ion-list>
+            <ion-item>
+                <ion-icon item-left name="card"></ion-icon>
+                <h3>IBAN</h3>
+                <ion-note>{{RIB.iban}}</ion-note>
+            </ion-item>
+        </ion-list>
+
+        <ion-item>
+            <button ion-button color="secondary" icon-left (click)="certify(RIB)" clear item-left>
+                <ion-icon name="checkbox"></ion-icon>
+                Certify
+            </button>
+        </ion-item>
+
+    </ion-card>
+</ion-content>
