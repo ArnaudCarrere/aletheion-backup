@@ -1,6 +1,8 @@
 {
   "name": "aletheion-ionic3",
   "app_id": "",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
