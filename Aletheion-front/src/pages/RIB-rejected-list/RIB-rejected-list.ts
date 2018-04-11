@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {RIBService} from '../../providers/RIB-service-rest';
 import {RIBRejectedDetailPage} from '../RIB-rejected-detail/RIB-rejected-detail';
+import {TouchID} from '@ionic-native/touch-id';
 
 @Component({
     selector: 'page-RIB-rejected-list',
@@ -13,7 +14,7 @@ export class RIBRejectedListPage {
     RIBsForSearch: Array<any>;
     searchKey: string = "";
 
-    constructor(public navCtrl: NavController, public service: RIBService, public toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController, public service: RIBService, public toastCtrl: ToastController, private touchId: TouchID) {
         this.getRejected();
     }
 
@@ -22,17 +23,21 @@ export class RIBRejectedListPage {
     }
 
     certify(RIB) {
-        this.service.certify(RIB)
-            .then(() => {
-                let toast = this.toastCtrl.create({
-                    message: 'RIB certified',
-                    cssClass: 'mytoast',
-                    duration: 1000
-                });
-                toast.present(toast)
-                this.getRejected();
-            })
-            .catch(error => alert(JSON.stringify(error)));
+        this.touchId.verifyFingerprint('Scan your fingerprint please')
+            .then(
+                res => this.service.certify(RIB)
+                    .then(() => {
+                        let toast = this.toastCtrl.create({
+                            message: 'RIB certified',
+                            cssClass: 'mytoast',
+                            duration: 1000
+                        });
+                        toast.present(toast)
+                        this.getRejected();
+                    })
+                    .catch(error => alert(JSON.stringify(error))),
+                err => console.error('Error', err)
+            );
     }
 
     onInput(event) {

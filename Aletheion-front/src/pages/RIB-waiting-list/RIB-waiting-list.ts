@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {RIBService} from '../../providers/RIB-service-rest';
 import {RIBWaitingDetailPage} from '../RIB-waiting-detail/RIB-waiting-detail';
+import {TouchID} from '@ionic-native/touch-id';
 
 @Component({
     selector: 'page-RIB-waiting-list',
@@ -13,7 +14,7 @@ export class RIBWaitingListPage {
     RIBsForSearch: Array<any>;
     searchKey: string = "";
 
-    constructor(public navCtrl: NavController, public service: RIBService,  public toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController, public service: RIBService,  public toastCtrl: ToastController, private touchId: TouchID) {
         this.getWaiting();
     }
 
@@ -22,31 +23,39 @@ export class RIBWaitingListPage {
     }
 
     certify(RIB) {
-        this.service.certify(RIB)
-            .then(() => {
-                let toast = this.toastCtrl.create({
-                    message: 'RIB certified',
-                    cssClass: 'mytoast',
-                    duration: 1000
-                });
-                toast.present(toast)
-                this.getWaiting();
-            })
-            .catch(error => alert(JSON.stringify(error)));
+        this.touchId.verifyFingerprint('Scan your fingerprint please')
+            .then(
+                res => this.service.certify(RIB)
+                    .then(() => {
+                        let toast = this.toastCtrl.create({
+                            message: 'RIB certified',
+                            cssClass: 'mytoast',
+                            duration: 1000
+                        });
+                        toast.present(toast);
+                        this.getWaiting();
+                    })
+                    .catch(error => alert(JSON.stringify(error))),
+                err => console.error('Error', err)
+            );
     }
 
     reject(RIB) {
-        this.service.reject(RIB)
-            .then(() => {
-                let toast = this.toastCtrl.create({
-                    message: 'RIB rejected',
-                    cssClass: 'mytoast',
-                    duration: 1000
-                });
-                toast.present(toast)
-                this.getWaiting();
-            })
-            .catch(error => alert(JSON.stringify(error)));
+        this.touchId.verifyFingerprint('Scan your fingerprint please')
+            .then(
+                res => this.service.reject(RIB)
+                    .then(() => {
+                        let toast = this.toastCtrl.create({
+                            message: 'RIB rejected',
+                            cssClass: 'mytoast',
+                            duration: 1000
+                        });
+                        toast.present(toast);
+                        this.getWaiting();
+                    })
+                    .catch(error => alert(JSON.stringify(error))),
+                err => console.error('Error', err)
+            );
     }
 
     onInput(event) {

@@ -19,4 +19,5 @@ export class WelcomePage {
     openRIBWaitingList() {
         this.nav.setRoot(RIBWaitingListPage);
     }
+
 }

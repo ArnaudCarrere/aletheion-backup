@@ -17,6 +17,7 @@ import {RIBService} from "../providers/RIB-service-rest";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TouchID } from '@ionic-native/touch-id';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
+    TouchID,
     SplashScreen,
     RIBService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
