@@ -10,16 +10,21 @@
 <ion-content no-bounce>
     <ion-slides>
         <ion-slide style="background-image: url('assets/img/slide_1.jpg');">
-            <p>Aletheion permits to manage your RIBs</p>
-        </ion-slide>
-
-        <ion-slide style="background-image: url('assets/img/slide_1.jpg')">
-            <p>Secure all your subsidiaries' transfers</p>
+            <p>Blockchain secures your subsidiaries' transfers</p>
         </ion-slide>
 
         <ion-slide style="background-image: url('assets/img/slide_1.jpg')">
             <p>
-                Some RIBs need your certification!<br />
+                Identify yourself with the provided QR code<br />
+                <button ion-button (click)="openScanner()">
+                    Scan it
+                </button>
+            </p>
+        </ion-slide>
+
+        <ion-slide style="background-image: url('assets/img/slide_1.jpg')">
+            <p>
+                Some accounts need your certification!<br />
                 <button ion-button (click)="openRIBWaitingList()">
                     Have a look
                 </button>

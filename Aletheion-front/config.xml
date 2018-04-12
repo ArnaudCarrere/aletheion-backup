@@ -41,6 +41,9 @@
         <splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+            <string>camera use</string>
+        </config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
@@ -70,10 +73,15 @@
         <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
         <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
     </platform>
+    <engine name="ios" spec="4.5.4" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="cordova-plugin-touch-id" spec="^3.3.1" />
+    <plugin name="cordova-plugin-touch-id" spec="^3.3.1">
+        <variable name="FACEID_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.1" />
 </widget>

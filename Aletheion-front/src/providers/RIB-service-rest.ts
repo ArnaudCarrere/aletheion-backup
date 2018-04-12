@@ -14,6 +14,8 @@ let RIBsRejectedURL = RIBsURL + 'HQIdRejected/5ac5eeffc3ee561c701a93fb';
 let certifyRIBURL = RIBsURL + 'certify/';
 let rejectRIBURL = RIBsURL + 'reject/';
 
+let HQsURL = SERVER_URL + '/api/HQs/'
+
 
 @Injectable()
 export class RIBService {
@@ -21,6 +23,12 @@ export class RIBService {
     constructor(public http: Http) {
         this.http = http;
     }
+
+    getHQs() {
+        return this.http.get(HQsURL)
+            .map(res => res.json())
+            .toPromise();
+    }    
 
     getWaiting() {
         return this.http.get(RIBsWaitingURL)

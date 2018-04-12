@@ -12,12 +12,16 @@ import {RIBCertifiedDetailPage} from '../pages/RIB-certified-detail/RIB-certifie
 import {RIBRejectedListPage} from '../pages/RIB-rejected-list/RIB-rejected-list';
 import {RIBRejectedDetailPage} from '../pages/RIB-rejected-detail/RIB-rejected-detail';
 import {AboutPage} from '../pages/about/about';
+import {QRScan} from '../pages/QR-scan/QR-scan';
+
 
 import {RIBService} from "../providers/RIB-service-rest";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TouchID } from '@ionic-native/touch-id';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { TouchID } from '@ionic-native/touch-id';
     RIBCertifiedListPage,
     RIBCertifiedDetailPage,
     RIBRejectedListPage,
-    RIBRejectedDetailPage
+    RIBRejectedDetailPage,
+    QRScan,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +51,15 @@ import { TouchID } from '@ionic-native/touch-id';
     RIBCertifiedListPage,
     RIBCertifiedDetailPage,
     RIBRejectedListPage,
-    RIBRejectedDetailPage
+    RIBRejectedDetailPage,
+    QRScan,
   ],
   providers: [
     StatusBar,
     TouchID,
     SplashScreen,
     RIBService,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

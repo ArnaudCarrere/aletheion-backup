@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Slides, Nav} from 'ionic-angular';
 import {RIBWaitingListPage} from '../RIB-waiting-list/RIB-waiting-list';
+import {QRScan} from '../QR-scan/QR-scan';
 
 @Component({
     selector: 'page-welcome',
@@ -18,6 +19,10 @@ export class WelcomePage {
 
     openRIBWaitingList() {
         this.nav.setRoot(RIBWaitingListPage);
+    }
+
+    openScanner() {
+        this.nav.setRoot(QRScan);
     }
 
 }

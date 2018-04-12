@@ -8,6 +8,7 @@ import {RIBCertifiedListPage} from '../pages/RIB-certified-list/RIB-certified-li
 import {RIBRejectedListPage} from '../pages/RIB-rejected-list/RIB-rejected-list';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {AboutPage} from '../pages/about/about';
+import {QRScan} from '../pages/QR-scan/QR-scan';
 
 export interface MenuItem {
     title: string;
@@ -33,7 +34,8 @@ export class MyApp {
         this.appMenuItems = [
             {title: 'Awaiting RIBs', component: RIBWaitingListPage, icon: 'alert'},
             {title: 'Certified RIBs', component: RIBCertifiedListPage, icon: 'checkbox'},
-            {title: 'Rejected RIBs', component: RIBRejectedListPage, icon: 'close-circle'}
+            {title: 'Rejected RIBs', component: RIBRejectedListPage, icon: 'close-circle'},
+            {title: 'QR Code Scanner', component: QRScan, icon: 'qr-scanner'}
         ];
 
         this.helpMenuItems = [
