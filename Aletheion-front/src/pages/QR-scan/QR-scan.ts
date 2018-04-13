@@ -14,10 +14,9 @@ export class QRScan {
     options: BarcodeScannerOptions;
     HQs: Array<any>;
     selectedHQ: any={};
-    HQFound:boolean = false;
     scannedData:any={};
 
-    constructor(public navCtrl: NavController, public service: RIBService,  public toastCtrl: ToastController, public scanner: BarcodeScanner, public nav: Nav) {
+    constructor(public navCtrl: NavController, public service: RIBService, public toastCtrl: ToastController, public scanner: BarcodeScanner, public nav: Nav) {
         this.getHQs();
         this.scan();
     }
@@ -37,16 +36,25 @@ export class QRScan {
     analyze() {
         this.selectedHQ = this.HQs.find(HQ => HQ.id === this.scannedData.text);
         if(this.selectedHQ !== undefined) {
-            this.HQFound = true;
-            let toast = this.toastCtrl.create({
-                message: 'Welcome ' + this.selectedHQ.name,
-                cssClass: 'mytoast',
-                duration: 2000
-            });
-            toast.present(toast);
-            this.nav.setRoot(RIBWaitingListPage);
+            if(this.selectedHQ.touch !== "Configured") {
+                this.service.setHQ(this.selectedHQ.id);                
+                this.service.configure(this.selectedHQ);
+                let toast = this.toastCtrl.create({
+                    message: 'Welcome ' + this.selectedHQ.name,
+                    cssClass: 'mytoast',
+                    duration: 2000
+                });
+                toast.present(toast);
+                this.nav.setRoot(RIBWaitingListPage);
+            } else {
+                let toast = this.toastCtrl.create({
+                    message: 'QR code  already used',
+                    cssClass: 'mytoast',
+                    duration: 2000
+                });
+                toast.present(toast);
+            }
         } else {
-            this.HQFound = false;
             let toast = this.toastCtrl.create({
                 message: 'Unvalid QR code',
                 cssClass: 'mytoast',
