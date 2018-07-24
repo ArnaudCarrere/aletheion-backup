@@ -23,9 +23,7 @@ export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any = WelcomePage;
-
     appMenuItems: Array<MenuItem>;
-
     helpMenuItems: Array<MenuItem>;
 
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
